@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class FileHandlingUtility {
+
+    static String fileName = "sample.txt";
+
+    public static void writeFile(String content) throws IOException {
+        FileWriter fw = new FileWriter(fileName);
+        fw.write(content);
+        fw.close();
+        System.out.println("File written successfully.");
+    }
+
+    public static void readFile() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+        String line;
+        System.out.println("File Content:");
+        while ((line = br.readLine()) != null) {
+            System.out.println(line);
+        }
+        br.close();
+    }
+
+    public static void appendFile(String content) throws IOException {
+        FileWriter fw = new FileWriter(fileName, true);
+        fw.write("\n" + content);
+        fw.close();
+        System.out.println("File modified successfully.");
+    }
+
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter content to write:");
+        writeFile(sc.nextLine());
+
+        readFile();
+
+        System.out.println("Enter content to append:");
+        appendFile(sc.nextLine());
+
+        readFile();
+        sc.close();
+    }
+}
